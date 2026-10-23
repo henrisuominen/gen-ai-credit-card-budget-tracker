@@ -1,0 +1,21 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "gen-ai-credit-card-budget-tracker"
+version = "0.1.0"
+description = "GenAI Credit Card Budget Tracker"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "google-adk>=1.0.0",
+    "google-genai>=1.0.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.scripts]
+budget-tracker = "app.agents:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["app"]
