@@ -4,13 +4,14 @@ WORKDIR /app
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    PORT=8080
+    HOST=127.0.0.1 \
+    PORT=8000
 
 COPY pyproject.toml README.md ./
 COPY app/ ./app/
 
 RUN pip install --no-cache-dir .
 
-EXPOSE 8080
+EXPOSE 8000
 
-CMD ["python", "-m", "app.agents"]
+CMD ["adk", "web", "--host", "127.0.0.1", "--port", "8000"]

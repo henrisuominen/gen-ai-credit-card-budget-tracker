@@ -1,0 +1,45 @@
+{
+  "eval_set_id": "credit_card_budget_tracker_golden_eval_set",
+  "name": "Credit Card Budget Tracker Golden Evaluation Suite",
+  "description": "Golden dataset verifying PII anonymization, transaction classification, rule-based monthly recurring subscription detection, and spend reduction synthesis.",
+  "eval_cases": [
+    {
+      "eval_id": "statement_classification_and_recurring_audit",
+      "conversation": [
+        {
+          "invocation_id": "inv-001",
+          "user_content": {
+            "role": "user",
+            "parts": [
+              {
+                "text": "Please classify and audit this anonymized credit card statement:\n09/01 NETFLIX.COM #8812 $15.99\n10/01 NETFLIX.COM #9921 $15.99\n09/14 UBER LLC #12NYC $24.50\n09/18 WHOLE FOODS MARKET #104 $112.40"
+              }
+            ]
+          },
+          "final_response": {
+            "role": "model",
+            "parts": [
+              {
+                "text": "Your total spend is $168.88 across 4 transactions. NETFLIX was detected as a recurring monthly subscription at $15.99/month ($191.88/year). Top spending category is Dining & Groceries ($112.40), followed by Subscriptions & Utilities ($31.98) and Transportation ($24.50)."
+              }
+            ]
+          },
+          "intermediate_data": {
+            "tool_uses": [
+              {
+                "name": "classify_statement_transactions_batch",
+                "args": {
+                  "anonymized_statement_text": "09/01 NETFLIX.COM #8812 $15.99\n10/01 NETFLIX.COM #9921 $15.99\n09/14 UBER LLC #12NYC $24.50\n09/18 WHOLE FOODS MARKET #104 $112.40"
+                }
+              },
+              {
+                "name": "detect_recurring_monthly_subscriptions",
+                "args": {}
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

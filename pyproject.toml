@@ -5,13 +5,28 @@ build-backend = "hatchling.build"
 [project]
 name = "gen-ai-credit-card-budget-tracker"
 version = "0.1.0"
-description = "GenAI Credit Card Budget Tracker"
+description = "GenAI Credit Card Budget Tracker Agent for Gemini Enterprise Agent Platform"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "google-adk>=1.0.0",
     "google-genai>=1.0.0",
+    "google-cloud-aiplatform[adk,agent_engines]>=1.70.0",
+    "google-cloud-documentai>=2.29.0",
+    "google-cloud-dlp>=3.21.0",
+    "google-cloud-secret-manager>=2.20.0",
+    "google-cloud-logging>=3.10.0",
+    "opentelemetry-api>=1.25.0",
+    "opentelemetry-sdk>=1.25.0",
+    "opentelemetry-exporter-gcp-trace>=1.6.0",
+    "pydantic>=2.7.0",
     "python-dotenv>=1.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
 ]
 
 [project.scripts]
@@ -19,3 +34,7 @@ budget-tracker = "app.agents:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["app"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
